@@ -22,11 +22,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee add(String firstName, String lastName) {
         Employee employee = new Employee(firstName, lastName);
-        if (employees.containsKey(employee.getFullName())) {
-            throw new EmployeeAlreadyAddedException();
-        }
-        employees.put(employee.getFullName(), employee);
+
         return employee;
+    }
+
+    @Override
+    public Employee add(String firstName, String lastName, int salary, int departmentId) {
+        Employee employee = new Employee(firstName, lastName, salary, departmentId);
+        return add(employee);
     }
 
     @Override
@@ -50,5 +53,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Collection<Employee> findAll() {
         return Collections.unmodifiableCollection(employees.values());
+    }
+
+    private Employee add(Employee employee) {
+        if (employees.containsKey(employee.getFullName())) {
+            throw new EmployeeAlreadyAddedException();
+        }
+        employees.put(employee.getFullName(), employee);
+        return employee;
     }
 }
