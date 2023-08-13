@@ -1,9 +1,6 @@
 package pro.sky.lesson28.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pro.sky.lesson28.model.Employee;
 import pro.sky.lesson28.service.DepartmentService;
 
@@ -19,6 +16,11 @@ public class DepartmentController {
 
     public DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
+    }
+
+    @GetMapping("/{departmentId}/salary/sum")
+    public Integer getDepartmentSalarySum(@PathVariable int departmentId) {
+        return departmentService.getDepartmentSalarySum(departmentId);
     }
 
     @GetMapping("/max-salary")
